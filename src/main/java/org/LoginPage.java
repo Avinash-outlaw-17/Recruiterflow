@@ -3,11 +3,10 @@ package org;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 public class LoginPage {
     private WebDriver driver;
-
-    // Locators using XPath for better readability and consistency
     private By usernameField = By.xpath("//input[@name='username']");
     private By passwordField = By.xpath("//input[@name='password']");
     private By loginButton = By.xpath("//button[@type='submit']");

@@ -14,10 +14,6 @@ public class RecruitmentFlow {
         this.driver=driver;
     }
 
-    public void RecruitmentPage(WebDriver driver) {
-        this.driver = driver;
-    }
-
     public void navigateToRecruitment() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -32,7 +28,6 @@ public class RecruitmentFlow {
     public void addCandidate(String firstName, String lastName, String email, String resumePath) {
         driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div[2]/div[1]/button")).click();
 
-        // Add explicit wait for the first name field to become visible
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@name='firstName']")));
 
