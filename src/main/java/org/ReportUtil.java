@@ -13,9 +13,9 @@ import java.util.Properties;
 
 public class ReportUtil {
     public static void sendEmailWithReport(String filePath) throws Exception {
-        final String from = "FromEmail@gmail.com";
-        final String password = "password";
-        final String to = "ReceiverEmail@gmail.com";
+        final String from = "SenderEmail@gmail.com";
+        final String password = "Password";
+        final String to = "Reciever@gmail.com";
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
