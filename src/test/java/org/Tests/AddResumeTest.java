@@ -36,6 +36,7 @@ public class AddResumeTest {
 
         recruitmentPage.takeScreenshot(Constants.SCREENSHOT_PATH);
 
+        //This email trigger will only work when i add the working credentials in the ReportUtil class
         ReportUtil.sendEmailWithReport(Constants.SCREENSHOT_PATH);
     }
 

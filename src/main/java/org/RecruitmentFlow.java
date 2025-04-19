@@ -9,9 +9,11 @@ import java.time.Duration;
 
 public class RecruitmentFlow {
     private WebDriver driver;
+    private WebDriverWait wait;
 
     public RecruitmentFlow(WebDriver driver) {
         this.driver=driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
     public void navigateToRecruitment() {
@@ -34,6 +36,10 @@ public class RecruitmentFlow {
         driver.findElement(By.xpath("//input[@name='firstName']")).sendKeys(firstName);
         driver.findElement(By.xpath("//input[@name='lastName']")).sendKeys(lastName);
         driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div/form/div[3]/div/div[1]/div/div[2]/input")).sendKeys(email);
+        WebElement jobVacancyDropdown = driver.findElement(By.xpath("//label[text()='Vacancy']/following::div[@class='oxd-select-text--after'][1]"));
+        jobVacancyDropdown.click();
+        WebElement option = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@role='listbox']//span[text()='Software Engineer']")));
+        option.click();
 
         WebElement resumeUpload = driver.findElement(By.xpath("//input[@type='file']"));
         resumeUpload.sendKeys(new File(resumePath).getAbsolutePath());
@@ -43,6 +49,7 @@ public class RecruitmentFlow {
     }
 
     public void takeScreenshot(String path) throws Exception {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@class,'oxd-table')]")));
         TakesScreenshot ts = (TakesScreenshot) driver;
         File src = ts.getScreenshotAs(OutputType.FILE);
         File dest = new File(path);
