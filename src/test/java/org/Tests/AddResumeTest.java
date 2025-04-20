@@ -20,23 +20,25 @@ public class AddResumeTest {
     @Test(enabled = true)
     public void testAddCandidate() throws Exception {
         BaseClass.driver.get(Constants.BASE_URL);
+
         WebDriverWait wait = new WebDriverWait(BaseClass.driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@type='submit']")));
 
         LoginPage loginPage = new LoginPage(BaseClass.driver);
         loginPage.login(BaseClass.props.getProperty("username"), BaseClass.props.getProperty("password"));
-        Thread.sleep(3000);
 
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[text()='Recruitment']")));
         RecruitmentFlow recruitmentPage = new RecruitmentFlow(BaseClass.driver);
         recruitmentPage.navigateToRecruitment();
-        Thread.sleep(2000);
 
+
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(., 'Add')]")));
         recruitmentPage.addCandidate("Avinash", "Hiremath", "avinashhiremath7@email.com", Constants.RESUME_PATH);
-        Thread.sleep(2000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(), 'Successfully Saved')]")));
 
         recruitmentPage.takeScreenshot(Constants.SCREENSHOT_PATH);
 
-        //This email trigger will only work when i add the working credentials in the ReportUtil class
+        // This email trigger will only work when valid credentials are set
         ReportUtil.sendEmailWithReport(Constants.SCREENSHOT_PATH);
     }
 
